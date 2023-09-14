@@ -12,14 +12,6 @@
       if ('%PROD%' === 'true') {
         document.addEventListener('contextmenu', (e) => e.preventDefault());
       }
-      document.body.addEventListener('mousedown', () => {
-        document.body.classList.remove('keyboard');
-      });
-      document.body.addEventListener('keydown', (e) => {
-        if (e.keyCode === 9) {
-          document.body.classList.add('keyboard');
-        }
-      });
     </script>
   </body>
 </html>

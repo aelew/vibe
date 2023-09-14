@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 body {
-  @apply antialiased text-white rounded-lg;
+  @apply antialiased text-white rounded-lg cursor-default;
 }
