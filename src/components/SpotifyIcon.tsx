@@ -3,7 +3,7 @@ export function SpotifyIcon() {
     <svg
       role="img"
       viewBox="0 0 24 24"
-      className="w-4 h-4"
+      className="h-4 w-4"
       fill="currentColor"
       data-tauri-drag-region
       xmlns="http://www.w3.org/2000/svg"

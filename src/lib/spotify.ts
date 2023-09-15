@@ -1,5 +1,6 @@
 import { AccessToken } from '@spotify/web-api-ts-sdk';
 import { open } from '@tauri-apps/api/shell';
+
 import { store } from './store';
 
 export const SPOTIFY_CLIENT_ID = '9ceca747830f42f5afdbc54f307615e6';

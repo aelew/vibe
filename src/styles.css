@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply antialiased text-white rounded-lg cursor-default overflow-hidden;
+  @apply cursor-default overflow-hidden rounded-lg text-white antialiased;
 }
 
 button {
