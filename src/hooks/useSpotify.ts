@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
 import { SpotifyApi, type AccessToken } from '@spotify/web-api-ts-sdk';
-import { SPOTIFY_CLIENT_ID, refreshAccessToken } from '../lib/spotify';
+import { useEffect, useState } from 'react';
+
+import { refreshAccessToken, SPOTIFY_CLIENT_ID } from '../lib/spotify';
 import { store } from '../lib/store';
 
 export function useSpotify() {

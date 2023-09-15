@@ -3,9 +3,9 @@ import { SpotifyAuth } from './components/SpotifyAuth';
 
 function App() {
   return (
-    <div className="rounded-lg group relative dark select-none bg-black/60 min-h-screen flex justify-center">
+    <div className="dark group relative flex min-h-screen select-none justify-center rounded-lg bg-black/60">
       <main
-        className="gap-2 p-2 flex items-center w-full"
+        className="flex w-full items-center gap-2 p-2"
         data-tauri-drag-region
       >
         <SpotifyAuth>

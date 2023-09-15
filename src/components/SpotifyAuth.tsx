@@ -1,10 +1,11 @@
-import { type PropsWithChildren, useState } from 'react';
-import { authorize, fetchTokens } from '../lib/spotify';
 import { invoke } from '@tauri-apps/api';
 import { listen } from '@tauri-apps/api/event';
+import { useState, type PropsWithChildren } from 'react';
+
+import { useEffectOnce } from '../hooks/useEffectOnce';
+import { authorize, fetchTokens } from '../lib/spotify';
 import { store } from '../lib/store';
 import { SpotifyIcon } from './SpotifyIcon';
-import { useEffectOnce } from '../hooks/useEffectOnce';
 
 export function SpotifyAuth({ children }: PropsWithChildren) {
   const [locked, setLocked] = useState(true);
@@ -41,13 +42,13 @@ export function SpotifyAuth({ children }: PropsWithChildren) {
   if (locked) {
     return (
       <button
-        className="mx-auto flex items-center gap-2 hover:text-[#1DB954] transition-colors"
+        className="mx-auto flex items-center gap-2 transition-colors hover:text-[#1DB954]"
         onClick={startOauthProcess}
         data-tauri-drag-region
       >
         <SpotifyIcon />
         <span
-          className="text-xs uppercase tracking-wide font-bold"
+          className="text-xs font-bold uppercase tracking-wide"
           data-tauri-drag-region
         >
           Connect to Spotify

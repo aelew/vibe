@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import { useInterval } from '../hooks/useInterval';
-import { useSpotify } from '../hooks/useSpotify';
 import type { PlaybackState, Track } from '@spotify/web-api-ts-sdk';
 import { MusicIcon } from 'lucide-react';
-import { match } from 'ts-pattern';
+import { useState } from 'react';
 import Marquee from 'react-fast-marquee';
+import { match } from 'ts-pattern';
+
+import { useInterval } from '../hooks/useInterval';
+import { useSpotify } from '../hooks/useSpotify';
 
 const POLLING_INTERVAL = 1000;
 
@@ -51,15 +52,15 @@ export function CurrentTrackInfo() {
           />
         ) : (
           <div
-            className="w-9 h-9 rounded-md bg-[#282828] flex items-center justify-center"
+            className="flex h-9 w-9 items-center justify-center rounded-md bg-[#282828]"
             data-tauri-drag-region
           >
             <MusicIcon className="h-4 w-4" data-tauri-drag-region />
           </div>
         )}
       </div>
-      <div className="flex flex-col w-[80%]">
-        <div className="font-semibold text-sm leading-4 pb-1 -mb-1">
+      <div className="flex w-[80%] flex-col">
+        <div className="-mb-1 pb-1 text-sm font-semibold leading-4">
           {trackName.length > 25 ? (
             <Marquee speed={25}>
               <h1 className="mr-3" data-tauri-drag-region>
