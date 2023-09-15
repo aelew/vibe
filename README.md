@@ -1,7 +1,38 @@
-# Tauri + React + Typescript
+<div align="center">
+    <h1>Vibe</h1>
+    <p>A Spotify companion overlay to help you see what you're listening to.</p>
+</div>
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
+## Installation
 
-## Recommended IDE Setup
+[Click here](https://github.com/aelew/vibe/releases/latest) to download the latest release.
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+## Run app (dev)
+
+Clone the project
+
+```bash
+git clone https://github.com/aelew/vibe.git
+```
+
+Go to the project directory
+
+```bash
+cd vibe
+```
+
+Install dependencies
+
+```bash
+pnpm install
+```
+
+Launch Vibe
+
+```bash
+pnpm tauri dev
+```
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
