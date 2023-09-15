@@ -45,11 +45,6 @@
           "domain": "accounts.spotify.com",
           "windows": ["main"],
           "enableTauriAPI": true
-        },
-        {
-          "domain": "localhost",
-          "windows": ["main"],
-          "enableTauriAPI": true
         }
       ]
     },
@@ -62,6 +57,7 @@
         "transparent": true,
         "fullscreen": false,
         "resizable": false,
+        "focus": true,
         "title": "Vibe",
         "width": 225,
         "height": 52

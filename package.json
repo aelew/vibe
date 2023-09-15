@@ -1,7 +1,8 @@
 {
   "name": "vibe",
-  "private": true,
-  "version": "0.0.0",
+  "license": "MIT",
+  "author": "aelew",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -15,7 +16,9 @@
     "lucide-react": "^0.276.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tauri-plugin-store-api": "github:tauri-apps/tauri-plugin-store#v1"
+    "react-fast-marquee": "^1.6.0",
+    "tauri-plugin-store-api": "github:tauri-apps/tauri-plugin-store#v1",
+    "ts-pattern": "^5.0.5"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^1.4.0",

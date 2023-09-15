@@ -12,8 +12,14 @@ export function useSpotify() {
         fetch: async (req, init) => {
           let response = await fetch(req, init);
           if (response.status === 401) {
-            await refreshAccessToken();
-            response = await fetch(req, init);
+            const newAccessToken = await refreshAccessToken();
+            response = await fetch(req, {
+              ...init,
+              headers: {
+                ...init?.headers,
+                Authorization: 'Bearer ' + newAccessToken
+              }
+            });
           }
           return response;
         }
@@ -22,12 +28,12 @@ export function useSpotify() {
   };
 
   useEffect(() => {
-    store.get('spotify_token').then((value) => {
+    store.get('spotify').then((value) => {
       if (value) {
         handleSdkSetup(value as AccessToken);
       }
     });
-    store.onKeyChange('spotify_token', (value) => {
+    store.onKeyChange('spotify', (value) => {
       if (value) {
         handleSdkSetup(value as AccessToken);
       }

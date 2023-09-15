@@ -3,5 +3,9 @@
 @tailwind utilities;
 
 body {
-  @apply antialiased text-white rounded-lg cursor-default;
+  @apply antialiased text-white rounded-lg cursor-default overflow-hidden;
+}
+
+button {
+  @apply cursor-pointer;
 }

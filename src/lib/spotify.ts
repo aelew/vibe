@@ -3,7 +3,7 @@ import { open } from '@tauri-apps/api/shell';
 import { store } from './store';
 
 export const SPOTIFY_CLIENT_ID = '9ceca747830f42f5afdbc54f307615e6';
-export const SPOTIFY_REDIRECT_URI = 'http://localhost:52855/cb';
+const SPOTIFY_REDIRECT_URI = 'http://localhost:52855/cb';
 
 export async function authorize() {
   const codeVerifier = generateRandomString(128);
@@ -44,12 +44,12 @@ export async function fetchTokens(authCode: string) {
   }
 
   const data = await response.json();
-  await store.set('spotify_token', data);
+  await store.set('spotify', data);
   await store.save();
 }
 
 export async function refreshAccessToken() {
-  const token = (await store.get('spotify_token')) as AccessToken | null;
+  const token = (await store.get('spotify')) as AccessToken | null;
   if (!token) {
     throw new Error('Not authenticated with Spotify.');
   }
@@ -63,13 +63,17 @@ export async function refreshAccessToken() {
     })
   });
   if (!response.ok) {
-    throw new Error('Failed to refresh access token');
+    console.warn('Failed to refresh access token, clearing token store...');
+    await store.delete('spotify');
+    await store.save();
+    return;
   }
 
   const data = await response.json();
   console.log('refresh', data);
-  await store.set('spotify_token', data);
+  await store.set('spotify', data);
   await store.save();
+  return data.access_token;
 }
 
 async function generateCodeChallenge(codeVerifier: string) {
