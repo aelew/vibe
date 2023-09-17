@@ -44,7 +44,7 @@ export function SpotifyAuth({ children }: PropsWithChildren) {
         onClick={startOauthProcess}
         data-tauri-drag-region
       >
-        <SpotifyIcon />
+        <SpotifyIcon className="h-4 w-4" />
         <span
           className="text-xs font-bold uppercase tracking-wide"
           data-tauri-drag-region
