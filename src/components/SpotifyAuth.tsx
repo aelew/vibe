@@ -1,8 +1,7 @@
 import { invoke } from '@tauri-apps/api';
 import { listen } from '@tauri-apps/api/event';
-import { useState, type PropsWithChildren } from 'react';
+import { useEffect, useState, type PropsWithChildren } from 'react';
 
-import { useEffectOnce } from '../hooks/useEffectOnce';
 import { authorize, fetchTokens } from '../lib/spotify';
 import { store } from '../lib/store';
 import { SpotifyIcon } from './SpotifyIcon';
@@ -15,8 +14,7 @@ export function SpotifyAuth({ children }: PropsWithChildren) {
     authorize();
   };
 
-  // Special hook for preventing the auth window from opening twice in dev
-  useEffectOnce(() => {
+  useEffect(() => {
     store.get('spotify').then((value) => {
       if (value) {
         setLocked(false);
@@ -37,7 +35,7 @@ export function SpotifyAuth({ children }: PropsWithChildren) {
     return () => {
       unlisten.then((f) => f());
     };
-  });
+  }, []);
 
   if (locked) {
     return (

@@ -1,6 +1,8 @@
 <div align="center">
+    <img width="72" src="./media/app-icon.png" />
     <h1>Vibe</h1>
     <p>A Spotify companion overlay to help you see what you're listening to.</p>
+    <img src="./media/preview.gif" />
 </div>
 
 ## Installation
