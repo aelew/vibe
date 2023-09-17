@@ -39,14 +39,7 @@
       ]
     },
     "security": {
-      "csp": null,
-      "dangerousRemoteDomainIpcAccess": [
-        {
-          "domain": "accounts.spotify.com",
-          "windows": ["main"],
-          "enableTauriAPI": true
-        }
-      ]
+      "csp": null
     },
     "macOSPrivateApi": true,
     "windows": [
