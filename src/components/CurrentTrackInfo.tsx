@@ -1,4 +1,4 @@
-import type { PlaybackState, Track } from '@spotify/web-api-ts-sdk';
+import type { Episode, PlaybackState, Track } from '@spotify/web-api-ts-sdk';
 import { MusicIcon } from 'lucide-react';
 import { useState } from 'react';
 import Marquee from 'react-fast-marquee';
@@ -17,51 +17,77 @@ export function CurrentTrackInfo() {
 
   useInterval(() => {
     if (spotify) {
-      spotify.player.getCurrentlyPlayingTrack().then(setPlaybackState);
+      spotify.player
+        .getCurrentlyPlayingTrack(undefined, 'episode')
+        .then(setPlaybackState);
     }
   }, POLLING_INTERVAL);
 
   const trackName = playbackState
     ? match(playbackState.currently_playing_type)
         .with('track', () => playbackState.item.name)
-        .with('episode', () => 'Episode')
+        .with('episode', () => playbackState.item.name)
         .with('unknown', () => 'Unknown')
         .with('ad', () => 'Advertisement')
         .otherwise(() => '--')
     : '--';
 
-  const artistName =
-    playbackState?.currently_playing_type === 'track'
-      ? (playbackState.item as Track | undefined)?.album.artists
-          .map((artist) => artist.name)
-          .join(', ') ?? '--'
-      : '';
+  const artistName = playbackState
+    ? match(playbackState.currently_playing_type)
+        .with(
+          'track',
+          () =>
+            (playbackState.item as Track).album.artists
+              .map((artist) => artist.name)
+              .join(', ') ?? '--'
+        )
+        .with('episode', () => (playbackState.item as Episode).show.name)
+        .otherwise(() => '')
+    : '';
 
   return (
     <>
       <div className="shrink-0">
-        {playbackState?.currently_playing_type === 'track' &&
-        (playbackState.item as Track).album.images.length ? (
-          <img
-            src={(playbackState.item as Track).album.images[0].url}
-            data-tauri-drag-region
-            className="rounded-md"
-            draggable={false}
-            height={36}
-            width={36}
-          />
-        ) : (
-          <div
-            className="flex h-9 w-9 items-center justify-center rounded-md bg-[#282828]"
-            data-tauri-drag-region
-          >
-            <MusicIcon className="h-4 w-4" data-tauri-drag-region />
-          </div>
-        )}
+        {playbackState &&
+          match(playbackState.currently_playing_type)
+            .with('track', () => (
+              <a
+                href={playbackState.item.external_urls.spotify}
+                target="_blank"
+              >
+                <img
+                  src={(playbackState.item as Track).album.images[0].url}
+                  draggable={false}
+                  height={36}
+                  width={36}
+                />
+              </a>
+            ))
+            .with('episode', () => (
+              <a
+                href={playbackState.item.external_urls.spotify}
+                target="_blank"
+              >
+                <img
+                  src={(playbackState.item as Episode).images[0].url}
+                  draggable={false}
+                  height={36}
+                  width={36}
+                />
+              </a>
+            ))
+            .otherwise(() => (
+              <div
+                className="flex h-9 w-9 items-center justify-center bg-[#282828]"
+                data-tauri-drag-region
+              >
+                <MusicIcon className="h-4 w-4" data-tauri-drag-region />
+              </div>
+            ))}
       </div>
       <div className="flex w-[80%] flex-col">
         <div className="-mb-1 pb-1 text-sm font-semibold leading-4">
-          {trackName.length > 25 ? (
+          {trackName.length > 22 ? (
             <Marquee speed={25}>
               <h1 className="mr-3" data-tauri-drag-region>
                 {trackName}

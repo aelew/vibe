@@ -1,10 +1,10 @@
-export function SpotifyIcon() {
+export function SpotifyIcon({ className }: { className?: string }) {
   return (
     <svg
       role="img"
       viewBox="0 0 24 24"
-      className="h-4 w-4"
       fill="currentColor"
+      className={className}
       data-tauri-drag-region
       xmlns="http://www.w3.org/2000/svg"
     >
